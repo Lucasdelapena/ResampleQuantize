@@ -27,6 +27,27 @@ def check_args(s,d,i): #Arguments check
     
     return True
 
+def imageResize(image, maxWidth, maxHeight): #Resize image
+    if image.shape[1] > maxWidth or image.shape[0] > maxHeight:
+               
+        width = image.shape[1]
+        height = image.shape[0]
+        ratio = width / height            
+        if width > maxWidth:
+            newWidth = maxWidth
+            newHeight = int(newWidth / ratio)
+        elif height > maxHeight:
+            newHeight = maxHeight
+            newWidth = int(newHeight * ratio)
+        else:
+            newWidth = width
+            newHeight = height
+    else:
+        newWidth = image.shape[1]
+        newHeight = image.shape[0]
+
+    return newHeight, newWidth
+
 def main():
     # Arguments
     parser = argparse.ArgumentParser(prog='sample') # -h should be automatically added because of argparse
@@ -43,16 +64,21 @@ def main():
     if not check_args(s,d,i): #Arguments check
         return
     
+    # Get monitor information
+    for m in get_monitors(): #note: this gets takes the last monitor info
+        maxWidth = m.width
+        maxHeight = m.height 
+   
     #Read image
     image = cv2.imread(args.imagefile)
     if image is None:
         print("Image not found.")
         return
-    
-    
 
-    #Apply downsampling followed by upsampling
-
+    height, width = imageResize(image, maxWidth, maxHeight)
+    image = cv2.resize(image, (width, height))
+    cv2.resizeWindow('Original Image', width, height)
+    cv2.imshow('Original Image', image)
 
 
 
