@@ -1,0 +1,12 @@
+Lucas De La Pena
+python Assignment2_CS4420.py -a -g -rows numrows -cols numcols -t type indir outdir
+
+
+This program is built off python 3 and is needed to run. You will also need to install opencv-python, and screeninfo. With this project my biggest issue was trying to get the upsampling to work, I think that was my biggest hurdle for the project. 
+
+Sample execution:
+ python Assignment3_CS4420.py -s 2 -d 5 -i 3 photo.png
+
+installs:
+pip install screen info
+pip install opencv-python
