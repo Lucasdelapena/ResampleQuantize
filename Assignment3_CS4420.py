@@ -125,23 +125,24 @@ def main():
     # Downsample image
     downSampleImage, newHeight, newWidth = downSample(image, s)
 
+
     # Apply intensity quantization after downsampling
-    intensityImage = intensity(downSampleImage, i)
-
-    # Display the downsampled and quantized image
-    windowName = f"Depth: {d}, Intensity: {i}"
-    cv2.namedWindow(windowName, cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(windowName, newWidth, newHeight)
-    cv2.imshow(windowName, intensityImage)
-    cv2.waitKey(0)
-
+    for f in range(d):
+        downSampleImage, newHeight, newWidth = downSample(downSampleImage, s)
+        intensityImage = intensity(downSampleImage, i)
+        # Display the downsampled and quantized image
+        windowName = f"Depth: {d}, Intensity: {i}"
+        cv2.namedWindow(windowName, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(windowName, newWidth, newHeight)
+        cv2.imshow(windowName, intensityImage)
+        cv2.waitKey(0)
+    
     # Upsample image
     upSampleImage, newHeight, newWidth = upSample(intensityImage, s)
-
     # Display the upsampled image
     windowName = f"Depth: {d}, Intensity: {i}"
     cv2.namedWindow(windowName, cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(windowName, newWidth, newHeight)
+    cv2.resizeWindow(windowName, width, height)
     cv2.imshow(windowName, upSampleImage)
     cv2.waitKey(0)
     
