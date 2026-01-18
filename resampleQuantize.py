@@ -1,7 +1,4 @@
 # Lucas de la Pena
-# CS4420
-# Assignment 3
-# 10/10/2024
 
 import cv2
 import numpy as np
